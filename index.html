@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hi, Yumi</title>
+  <title>Yumi's Birthday<3</title>
   <style>
     body {
-      background-color: #f0f8ff; /* Light blue background for a soft look */
       margin: 0;
-      font-family: 'Helvetica', 'Arial', sans-serif; /* Elegant Helvetica font as primary, fallback to Arial */
+      font-family: 'Helvetica', 'Arial', sans-serif; /* Elegant Helvetica font */
+      background-image: url('https://i.pinimg.com/736x/01/79/78/017978dc0b1fa39e1897813b5b35dce9.jpg');
+      background-size: cover; /* Cover the entire page */
+      background-repeat: no-repeat; /* Prevent repeating */
+      background-position: center; /* Center the image */
+      background-attachment: fixed; /* Keep the background fixed while scrolling */
     }
     .container {
       display: flex;
@@ -16,6 +20,8 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: #fff; /* White text for contrast against the background */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for readability */
     }
     h1 {
       color: #ff69b4; /* Hot pink for a romantic touch */
@@ -23,34 +29,33 @@
       font-weight: bold; /* Bold title as requested */
       margin-bottom: 20px;
       text-align: center; /* Center-align the title */
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     }
-    .clock {
+    .clock, .counter {
       margin: 15px;
       padding: 10px;
-      background-color: #fff; /* White background for clocks */
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white for readability */
       border: 2px solid #ff69b4; /* Matching border color */
       border-radius: 8px; /* Rounded corners */
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      text-align: center; /* Center-align clock text */
+      text-align: center; /* Center-align text */
     }
-    .clock p:first-child {
-      font-style: italic; /* Italicize location text as requested */
-      font-weight: normal; /* Ensure location isn’t bold */
+    .clock p:first-child, .counter p:first-child {
+      font-style: italic; /* Italicize location and counter labels */
+      font-weight: normal;
       color: #333;
       margin-bottom: 5px;
     }
-    #exeter-time, #yangon-time {
-      font-size: 28px; /* Slightly larger for better readability */
+    #exeter-time, #yangon-time, #birthday-counter {
+      font-size: 28px;
       font-family: 'Helvetica', 'Courier New', monospace; /* Use Helvetica for time, fallback to monospace */
-      color: #ff1493; /* Deep pink for time */
-      text-align: center; /* Center-align the time */
+      color: #ff1493; /* Deep pink for time and counter */
+      text-align: center; /* Center-align the time and counter */
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Hi, Yumi.</h1>
+    <h1>Yumi's Birthday<3</h1>
     <div class="clock">
       <p>Exeter, UK</p>
       <p id="exeter-time"></p>
@@ -58,6 +63,10 @@
     <div class="clock">
       <p>Yangon, Myanmar</p>
       <p id="yangon-time"></p>
+    </div>
+    <div class="counter">
+      <p>Days & Hours Until Yumi's Birthday</p>
+      <p id="birthday-counter"></p>
     </div>
   </div>
   <script>
@@ -81,8 +90,25 @@
       document.getElementById('yangon-time').innerText = yangonTime;
     }
 
+    function updateBirthdayCounter() {
+      const now = new Date();
+      const birthday = new Date('April 7, 2025 00:00:00 GMT+0000');
+      const timeDiff = birthday - now;
+
+      if (timeDiff <= 0) {
+        document.getElementById('birthday-counter').innerText = "Happy Birthday, Yumi!";
+        return;
+      }
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById('birthday-counter').innerText = `${days} days, ${hours} hours`;
+    }
+
     updateClocks();
-    setInterval(updateClocks, 1000);
+    updateBirthdayCounter();
+    setInterval(updateClocks, 1000); // Update clocks every second
+    setInterval(updateBirthdayCounter, 1000); // Update counter every second
   </script>
 </body>
 </html>
