@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hi, Yumi</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .clock {
+      margin: 10px;
+    }
+    #exeter-time, #yangon-time {
+      font-size: 24px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hi, Yumi.</h1>
+    <div class="clock">
+      <p>Exeter, UK</p>
+      <p id="exeter-time"></p>
+    </div>
+    <div class="clock">
+      <p>Yangon, Myanmar</p>
+      <p id="yangon-time"></p>
+    </div>
+  </div>
+  <script>
+    function updateClocks() {
+      const exeterTime = new Date().toLocaleTimeString('en-GB', {
+        timeZone: 'Europe/London',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+      document.getElementById('exeter-time').innerText = exeterTime;
+
+      const yangonTime = new Date().toLocaleTimeString('en-GB', {
+        timeZone: 'Asia/Yangon',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+      document.getElementById('yangon-time').innerText = yangonTime;
+    }
+
+    updateClocks();
+    setInterval(updateClocks, 1000);
+  </script>
+</body>
+</html>
